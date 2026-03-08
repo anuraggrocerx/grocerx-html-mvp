@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <title>GrocerX India</title>
+  <link rel="stylesheet" href="grocerx.css"/>
+</head>
+<body>
+
+<!-- HEADER -->
+<div id="header">
+  <div class="h-top">
+    <div class="h-left">
+      <div class="h-sub">GrocerX India</div>
+      <div class="h-title">DELIVER In 4 Minutes</div>
+      <div class="h-addr"><b>Addr. -</b>&nbsp;Anurag Goswami&nbsp;▼</div>
+    </div>
+    <div class="h-icons">
+      <button class="h-icon-btn" onclick="showPage('cart')">
+        🛒<span class="hbadge" id="hcbadge" style="display:none">0</span>
+      </button>
+      <button class="h-icon-btn" onclick="showPage('profile')">👤</button>
+    </div>
+  </div>
+  <div id="search-bar">
+    <span>🔍</span>
+    <input id="si" placeholder="Search Grocery Items...." oninput="handleSearch(this.value)"/>
+    <div class="sdiv"></div>
+  </div>
+</div>
+
+<div id="main">
+
+  <!-- HOME -->
+  <div id="page-home" class="page active">
+    <div id="cat-strip"><div class="cs-inner" id="csi"></div></div>
+    <div id="banner-wrap">
+      <div id="banner-slide"></div>
+      <div id="banner-dots"></div>
+    </div>
+    <!-- Best Sellers -->
+    <div class="sec-hdr">
+      <h2>🔥 Best Sellers</h2>
+      <button class="see-all" onclick="selCat('all')">See All</button>
+    </div>
+    <div class="prod-grid" id="pgrid-home"></div>
+    <!-- Category Cards -->
+    <div id="cat-cards">
+      <div class="cr cr1" id="cr1"></div>
+      <div class="cr cr2" id="cr2"></div>
+      <div class="cr cr3" id="cr3"></div>
+    </div>
+    <!-- Scallop -->
+    <div id="scallop">
+      <svg viewBox="0 0 430 36" preserveAspectRatio="none">
+        <ellipse cx="-2"  cy="36" rx="23" ry="23" fill="#f0faf5"/>
+        <ellipse cx="41"  cy="36" rx="23" ry="23" fill="#f0faf5"/>
+        <ellipse cx="84"  cy="36" rx="23" ry="23" fill="#f0faf5"/>
+        <ellipse cx="127" cy="36" rx="23" ry="23" fill="#f0faf5"/>
+        <ellipse cx="170" cy="36" rx="23" ry="23" fill="#f0faf5"/>
+        <ellipse cx="213" cy="36" rx="23" ry="23" fill="#f0faf5"/>
+        <ellipse cx="256" cy="36" rx="23" ry="23" fill="#f0faf5"/>
+        <ellipse cx="299" cy="36" rx="23" ry="23" fill="#f0faf5"/>
+        <ellipse cx="342" cy="36" rx="23" ry="23" fill="#f0faf5"/>
+        <ellipse cx="385" cy="36" rx="23" ry="23" fill="#f0faf5"/>
+        <ellipse cx="428" cy="36" rx="23" ry="23" fill="#f0faf5"/>
+      </svg>
+      <div id="sf"></div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div id="page-products" class="page">
+    <div id="prod-hdr">
+      <button class="back-btn" onclick="goBack()">← Back</button>
+      <span id="ptitle">Products</span>
+    </div>
+    <div id="fstrip"><div class="fi-inner" id="fsi"></div></div>
+    <div id="pgrid"></div>
+    <div id="nores">
+      <div class="nr-ico">🔍</div>
+      <h3>Kuch nahi mila!</h3>
+    </div>
+  </div>
+
+  <!-- CART -->
+  <div id="page-cart" class="page">
+    <div id="cart-pg">
+      <div class="pg-title">🛒 Mera Cart</div>
+      <div id="ord-ok"><span class="be">🛵</span><div><b>Order Ho Gaya! 🎉</b><br><small>4 minutes mein aayega</small></div></div>
+      <div id="c-empty">
+        <div class="ce">🛒</div>
+        <h3>Cart Khaali Hai!</h3>
+        <p>Kuch items add karo phir order karo</p>
+        <button onclick="showPage('home')">🛍️ Shopping Karo</button>
+      </div>
+      <div id="citems"></div>
+      <div id="bill" style="display:none">
+        <h3>📋 Bill Summary</h3>
+        <div class="br"><span>Item Total (MRP)</span><span id="bm">₹0</span></div>
+        <div class="br g" id="sr" style="display:none"><span>🎉 Discount</span><span id="bs">-₹0</span></div>
+        <div class="br"><span>Delivery</span><span style="color:#2e7d32;font-weight:800">FREE ✓</span></div>
+        <div class="bdiv"></div>
+        <div class="br tot"><span>Total</span><span id="bt">₹0</span></div>
+      </div>
+      <button id="ord-btn" onclick="placeOrder()">🛵 Order Karo</button>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div id="page-categories" class="page">
+    <div id="cats-pg">
+      <div class="pg-title" style="padding:16px 0 8px">📦 All Categories</div>
+      <div id="cats-grid"></div>
+    </div>
+  </div>
+
+  <!-- PRINT -->
+  <div id="page-print" class="page">
+    <div id="print-pg">
+      <div class="pg-title" style="padding:16px 0 12px;text-align:center">🖨️ Print Services</div>
+      <div class="prc">
+        <div class="pi">🖨️</div>
+        <h3>Coming Soon!</h3>
+        <p>Print services jald aayegi<br>Stay tuned! 🚀</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROFILE -->
+  <div id="page-profile" class="page">
+    <div id="prof-pg">
+      <div class="pg-title" style="padding:16px 0 12px">👤 Mera Profile</div>
+      <div class="pcard">
+        <div class="pav">👤</div>
+        <div>
+          <div class="pn2">username.xyz</div>
+          <div class="pph">+91 98765 43210</div>
+          <div class="ppb">⭐ Premium Member</div>
+        </div>
+      </div>
+      <div class="pitem"><span class="pio">📦</span><div class="pt"><b>Mere Orders</b><small>Purani orders dekhein</small></div><span class="par">›</span></div>
+      <div class="pitem"><span class="pio">📍</span><div class="pt"><b>Mera Address</b><small>Koramangala, Bengaluru</small></div><span class="par">›</span></div>
+      <div class="pitem"><span class="pio">💳</span><div class="pt"><b>Payment Methods</b><small>UPI · Card · COD</small></div><span class="par">›</span></div>
+      <div class="pitem"><span class="pio">🎁</span><div class="pt"><b>Offers &amp; Coupons</b><small>GROX30 — 30% off!</small></div><span class="par">›</span></div>
+      <div class="pitem"><span class="pio">⚙️</span><div class="pt"><b>Settings</b><small>App preferences</small></div><span class="par">›</span></div>
+      <div class="pitem"><span class="pio">📞</span><div class="pt"><b>Help &amp; Support</b><small>24×7 available</small></div><span class="par">›</span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CART PILL -->
+<div id="cpill">
+  <button onclick="showPage('cart')">
+    <div class="pleft"><span class="pcnt" id="pcnt">0</span><span id="ptxt">0 items</span></div>
+    <span id="ppr">₹0 →</span>
+  </button>
+</div>
+
+<!-- BOTTOM NAV:  | CART | GROCERX(center) | CATEGORIES | PRINT -->
+<div id="bnav">
+  <button class="nb" id="nb-home" onclick="showPage('home')">
+    <span class="ni">🏠</span>
+    <span class="nl">HOME</span>
+  </button>
+  <button class="nb" id="nb-cart" onclick="showPage('cart')">
+    <span class="ni">🛒<span class="nbadge" id="cbadge">0</span></span>
+    <span class="nl">CART</span>
+  </button>
+  <button class="nb" id="nb-grocerx" onclick="showPage('home')">
+    <div id="hbw"><span>🏪</span></div>
+    <span class="nl" style="font-weight:900;color:#2a9d6a;font-size:9px">GROCERX</span>
+  </button>
+  <button class="nb" id="nb-categories" onclick="showPage('categories')">
+    <span class="ni">⊞</span>
+    <span class="nl">CATEGORIES</span>
+  </button>
+  <button class="nb" id="nb-print" onclick="showPage('print')">
+    <span class="ni">🖨️</span>
+    <span class="nl">PRINT</span>
+  </button>
+</div>
+
+<script src="grocerx.js"></script>
+</body>
+</html>
